@@ -44,4 +44,4 @@ Boa sorte!
 
 # Autor
 
-[<img src="https://avatars.githubusercontent.com/u/81385265?v=4" width=115><br><sub>Dakson Chaves Cruz</sub>]
+<img src="https://avatars.githubusercontent.com/u/81385265?v=4" width=115 height="auto"><br><sub>Dakson Chaves Cruz</sub>
