@@ -28,3 +28,20 @@ Boa sorte!
 - Experiência do usuário 20%
 - Organização do código/projeto 20%
 - Realizar o objetivo do projeto 40%
+
+## Instalação e execução do projeto
+
+- yarn
+- yarn dev
+
+## tecnologias
+
+- React
+- TypeScript
+- Chakra Ui
+- Axios
+- React-Query
+
+# Autor
+
+[<img src="https://avatars.githubusercontent.com/u/81385265?v=4" width=115><br><sub>Dakson Chaves Cruz</sub>]
