@@ -1,29 +1,54 @@
+import { 
+  Box, 
+  Flex, 
+  IconButton, 
+  Input, 
+  Stack, 
+  Text, 
+  Image, 
+  Button,
+  Icon,
+} from '@chakra-ui/react'
 import { SearchIcon } from '@chakra-ui/icons'
-import { Box, Flex, IconButton, Input, Stack, Text, Image } from '@chakra-ui/react'
-import axios from 'axios';
+import { BsWind } from 'react-icons/bs'
 import { useState } from 'react';
+import { api } from '../../services/api';
 import { IWeather } from '../../services/interfaces';
 
 export default function Home() {
   const [ city, setCity] = useState<string>('');
   const [ weatherForecast, setWeatherForecast] = useState<IWeather>( );
+  const [ weekForecast, setWeekForecast] = useState<IWeather>( );
+
+  const key = import.meta.env.VITE_SOME_KEY;
 
   async function handleSearchCitys() {
-    const response = await fetch(` http://api.weatherapi.com/v1/current.json?key=95d050496d8449caaa2134744221609&q=${city}&lang=pt`)
+    await api.get(`current.json?key=${key}&q=${city}&lang=pt`)
     .then(( response ) => {
       if ( response.status === 200 ) {
-        return response.json();
+        return response.data;
       }
     })
     .then(( data ) => {
       setWeatherForecast(data);
     })
   }
+
+  async function handleSearchCitysWeek() {
+    await api.get(`forecast.json?key=${key}&q=${city}&lang=pt&days=7`)
+    .then(( response ) => {
+      if ( response.status === 200 ) {
+        return response.data;
+      }
+    })
+    .then(( data ) => {
+      setWeekForecast(data);
+    })
+  }
  
   function handleClick(e: React.FormEvent<HTMLButtonElement>){
     e.preventDefault();
     handleSearchCitys();
-    console.log(city);
   }
     
   function handleChange(e: React.ChangeEvent<HTMLInputElement>){
@@ -31,10 +56,15 @@ export default function Home() {
     setCity(e.target.value);
   }
 
+  function handleClickWeek(e: React.FormEvent<HTMLButtonElement>){
+    e.preventDefault();
+    handleSearchCitysWeek();
+  }
+    
   return (
     <Stack
       w='100vw'
-      h='100vh'
+      h={['120vh', '']}
       align='center'
       p={['8', '12']}
       bg='gray.900'
@@ -42,9 +72,9 @@ export default function Home() {
       <Text 
         fontSize={["xl", "3xl", "6xl"]} 
         fontWeight='bold'
+        color='gray.50'
       >
-        Previsão do tempo 🌂
-        {/* ☔☂️☀️🌤️⛅☁️🌦️🌧️ */}
+        _Previsão do tempo 🌂
       </Text>
       <Flex display='flex' p={['2', '4']} as='form'>
         <Input
@@ -71,29 +101,109 @@ export default function Home() {
           <Box
             p={['2', '4']}
           >
-            <Text fontSize={["xl", "2xl", "5xl"]} fontWeight='bold' color='white'>
+            <Text 
+              fontSize={["xl", "2xl", "5xl"]} 
+              fontWeight='bold' 
+              color='white'
+              mb={['4', '8']}
+            >
               {weatherForecast.location.name}, {weatherForecast.location.region}
+            </Text>
+            <Text
+              fontSize={["xl", "2xl", "4xl"]}
+              fontWeight='bold'
+              color='red.500'
+              align='center'
+            >
+              Hoje
             </Text>
             <Box 
               display='flex' 
               flexDirection='row'
               justifyContent='center'
+              alignItems='center'
             >
               <Image src={weatherForecast.current.condition.icon} />
-              <Text fontSize={["xl", "2xl", "4xl"]} fontWeight='bold' color='white'>
-                {weatherForecast.current.temp_c}°C
-              </Text>
-            </Box>
               <Text 
-                fontSize={["xl", "2xl", "4xl"]} 
-                fontWeight='bold' color='gray.600' 
-                align='center'
-              >
-                Ventos {weatherForecast.current.wind_kph} km/h
+                fontSize={["xl", "2xl", "4xl"]}
+                color='white' 
+                ml='4'
+                >
+                {weatherForecast.current.temp_c}°C 
               </Text>
+              <Text
+                fontSize={["sm", "md", "2md"]} 
+                color='white'
+                ml='4'
+              >{weatherForecast.current.condition.text}</Text>
+            </Box>
+            <Text 
+              fontSize={["xl", "2xl", "4xl"]} 
+              color='gray.500'
+              align='center'
+            >
+              Umidade {weatherForecast.current.humidity}%
+            </Text>
+            <Text 
+              fontSize={["xl", "2xl", "4xl"]} 
+              color='gray.600' 
+              align='center'
+              display='flex'
+            >
+              Ventos {weatherForecast.current.wind_kph} km/h
+              <Text>
+                <Icon  as={BsWind} m='4' color='gray.100' w='8' h='8'/> 
+              </Text>
+            </Text>
+              <Flex>
+                <Button
+                  colorScheme='blue'
+                  size={['sm', 'md']}
+                  mt='6'
+                  type='submit'
+                  onClick={handleClickWeek}
+                >
+                  Próximos dias
+                </Button>
+              </Flex>
+              <Box p='6'>
+                {weekForecast ? (
+                  <Box
+                    textAlign='center'
+                    p='4'
+                    bg='gray.800'
+                    borderRadius='md'
+                    mt='4'
+                  >
+                    <Flex direction={['column', 'row']}>
+                      {weekForecast.forecast.forecastday.map((day, index) => {
+                        return (
+                          <Box 
+                            key={index}
+                            flexDirection='row'
+                            justifyContent='center'
+                            alignItems='center'
+                            bg='gray.700'
+                            borderRadius='md'
+                            p='4'
+                            m='4'
+                          >
+                            <Text
+                              fontSize={["xl", "2xl", "4xl"]}
+                              color='white'
+                              mr='4'
+                            >
+                              {day.date}
+                            </Text>
+                          </Box>
+                        )
+                      })}
+                    </Flex>
+                  </Box>
+                ) : null}
+              </Box>
           </Box>
-          
-        ) : null}
+      ) : null}
     </Stack>
   )
 }

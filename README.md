@@ -42,7 +42,7 @@ Boa sorte!
 - TypeScript
 - Chakra Ui
 - Axios
-- React-Query
+- Vite
 
 # Autor
 
