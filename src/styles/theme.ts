@@ -6,7 +6,7 @@ const customTheme = {
       'html, body': {
         color: 'gray.900',
         lineHeight: 'tall',
-        backgroundColor: 'gray.900',
+        bgGradient:'linear(to-l, #7928CA, gray.900)',
       },
       a: {
         color: 'teal.500',
