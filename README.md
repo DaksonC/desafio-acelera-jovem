@@ -7,7 +7,7 @@ Abaixo o desafio que você deverá concluir para validar seus conhecimentos.
 ### Climate app
 
 - Nesse projeto você irá criar um projeto de clima das cidades.
-- Você terá acesso a API nesse [link](https://hgbrasil.com/status/weather).
+- Você terá acesso a API nesse [link](https://www.weatherapi.com/).
 - O usuário deve digitar o nome da cidade em um input, pesquisar e obter os dados de clima dos dias da semana.
 - Deve aparecer todos os dias da semana e ao clicar em um dia deve redirecionar para uma outra página contendo os detalhes daquele dia.
 - O projeto deve ser responsivo, contemplando Desktop e Mobile.

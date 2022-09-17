@@ -18,14 +18,14 @@ import { ptBR } from 'date-fns/locale';
 import { useState } from 'react';
 import { api } from '../../services/api';
 import { IWeather } from '../../services/interfaces';
-import clima from '../../assets/clima.svg'
+import clima from '../../assets/clima.svg';
 
 export const formatDate = (date: string) => {
   return format(parseISO(date), "EEEEEE, d MMMM", { locale: ptBR });
 }
 
 export default function Home() {
-  const [ city, setCity] = useState<string>('');
+   const [ city, setCity] = useState<string>('');
   const [ weatherForecast, setWeatherForecast] = useState<IWeather>( );
   const [ weekForecast, setWeekForecast] = useState<IWeather>( );
   const [ loadings, setLoadings] = useState<boolean>(false);
@@ -74,12 +74,12 @@ export default function Home() {
     e.preventDefault();
     handleSearchCitysWeek();
   }
-    
+   
   return (
     <Stack 
-      align='center' 
-      justifyContent='center' 
-      p={['8', '12']} 
+    align='center' 
+    justifyContent='center' 
+    p={['8', '12']} 
     >
       <Text 
         fontSize={["xl", "3xl", "6xl"]}  
@@ -122,7 +122,7 @@ export default function Home() {
               color='white'
               mb={['4', '8']}
             >
-              {weatherForecast.location.name}, 
+              {weatherForecast.location.name},
               {weatherForecast.location.region}
             </Text>
             <Text
@@ -164,10 +164,9 @@ export default function Home() {
             >
               Umidade {weatherForecast.current.humidity}%
             </Text>
-            <Text 
+            <Box 
               fontSize={["xl", "2xl", "3xl"]} 
               color='gray.600' 
-              align='center'
               justifyContent='center'
               display='flex'
             >
@@ -181,7 +180,7 @@ export default function Home() {
                   color='gray.100' 
                 /> 
               </Text>
-            </Text>
+            </Box>
               <Flex>
                 <Button 
                   colorScheme='blue' 
