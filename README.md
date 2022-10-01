@@ -31,10 +31,10 @@ Boa sorte!
 
 ## Instalação e execução do projeto
 
-- git clone https://github.com/DaksonC/desafio-acelera-jovem.git
-- cd desafio-acelera-jovem
-- yarn
-- yarn dev
+-         $ git clone https://github.com/DaksonC/desafio-acelera-jovem.git
+-         $ cd desafio-acelera-jovem
+-         $ yarn
+-         $ yarn dev
 
 ## tecnologias
 
