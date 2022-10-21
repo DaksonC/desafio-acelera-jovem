@@ -36,7 +36,7 @@ Boa sorte!
 -          yarn
 -          yarn dev
 
-## tecnologias
+## Tecnologias
 
 - React
 - TypeScript
